@@ -1,4 +1,5 @@
 *.o
 test/*/test
+!test/*/test.cpp
 test/*/*.cpp
 test/*/*.hpp
