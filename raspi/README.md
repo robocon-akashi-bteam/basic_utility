@@ -1,7 +1,7 @@
 # ros_raspi_utility
 * [ARRC](https://github.com/AkashiRobo)用に作成しました
 * Ubuntu 16.04 LTS, Kinetic での使用を想定しています
-* Raspberry Piでとか言ってますが一部は他の環境でも使えます(予定)
+* Raspberry Piでとか言ってますが一部は他の環境でも使えるものもあります
 * src/にソースファイル、include/にヘッダーファイル, test/にテストプログラムがあります
 * テストプログラムはすべてmakeでコンパイルできます
 * constexpr, --pthread, とかを使ってるのでc++11以上じゃないと動きません  
@@ -178,7 +178,7 @@ int ros::RotaryInc::get()
 
 # MotorSerial
 * ARRCのMDDと通信するためのクラス
-* RasPiがマスター, Arduinoがスレーブ
+* RasPiがマスター, Arduino, Nucleo(L432KC)がスレーブ
 * UARTをRS485(半2重)に変換し通信する
 * Arduinoには[これ](https://github.com/Kitasola/ScrpMotor2018)を書き込む
   > その内STM32(Nucleo)をスレーブにするプログラムも実装予定
