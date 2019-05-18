@@ -126,7 +126,7 @@ short MotorSerial::send(unsigned char id, unsigned char cmd, short data,
   return sending(id, cmd, data);
 }
 
-short MotorSerial::send(SendDataFormat send_data, bool async_flag) {
+short MotorSerial::send(const SendDataFormat &send_data, bool async_flag) {
   return send(send_data.id, send_data.cmd, send_data.argData, async_flag);
 }
 
