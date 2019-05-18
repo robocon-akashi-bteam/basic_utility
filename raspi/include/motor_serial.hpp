@@ -26,7 +26,7 @@ public:
   short sending(unsigned char id, unsigned char cmd, short data);
   short send(unsigned char id, unsigned char cmd, short data,
              bool async_flag = false);
-  short send(SendDataFormat send_data, bool async_flag);
+  short send(const SendDataFormat &send_data, bool async_flag);
   virtual ~MotorSerial();
   bool sum_check_success_;
   short recent_receive_data_;
