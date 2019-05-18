@@ -79,6 +79,6 @@ void GY521::update() {
   }
 }
 
-struct ros::GY521Param GY521::checkParam() {
+ros::GY521Param GY521::checkParam() {
   return param_;
 }

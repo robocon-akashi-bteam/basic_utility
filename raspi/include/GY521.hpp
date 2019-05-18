@@ -39,7 +39,7 @@ public:
     yaw_ = start;
   }
   double checkStatus();
-  struct GY521Param checkParam();
+  GY521Param checkParam();
 
 private:
   I2c i2c_;
@@ -49,7 +49,7 @@ private:
   }
   double gyro_z_now_ = 0;
   double gyro_z_prev_ = 0;
-  struct timespec now_, prev_;
-  struct GY521Param param_;
+  timespec now_, prev_;
+  GY521Param param_;
 };
 };
