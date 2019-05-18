@@ -11,11 +11,11 @@ using ros::Pigpiod;
 using ros::Serial;
 
 namespace ros {
-typedef struct {
+struct SendDataFormat{
   unsigned char id;
   unsigned char cmd;
   short argData;
-} SendDataFormat;
+};
 
 class MotorSerial {
 public:
