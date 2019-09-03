@@ -24,11 +24,11 @@ private:
   bool now_A_, now_B_;
   static void rotary(int pi, unsigned int gpio, unsigned int edge,
                      uint32_t tick, void *userdata);
-  static void rotaryEx(int pi, unsigned int gpio, unsigned int edge,
-                       uint32_t tick, void *userdata);
-  static void rotaryEEx(int pi, unsigned int gpio, unsigned int edge,
+  static void rotaryTwo(int pi, unsigned int gpio, unsigned int edge,
                         uint32_t tick, void *userdata);
+  static void rotaryFour(int pi, unsigned int gpio, unsigned int edge,
+                         uint32_t tick, void *userdata);
   static void rotaryZ(int pi, unsigned int gpio, unsigned int edge,
                       uint32_t tick, void *userdata);
 };
-};
+}; // namespace ros

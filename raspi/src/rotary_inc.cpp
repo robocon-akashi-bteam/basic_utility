@@ -20,12 +20,12 @@ RotaryInc::RotaryInc(int user_A, int user_B, int multiplier) {
 
   switch (multiplier) {
   case 2:
-    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryEx, this);
-    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryEx, this);
+    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryTwo, this);
+    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryTwo, this);
     break;
   case 4:
-    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryEEx, this);
-    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryEEx, this);
+    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryFour, this);
+    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryFour, this);
     break;
   default:
     id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotary, this);
@@ -35,31 +35,7 @@ RotaryInc::RotaryInc(int user_A, int user_B, int multiplier) {
 }
 
 RotaryInc::RotaryInc(int user_A, int user_B, int multiplier, int user_Z) {
-  pin_A_ = user_A;
-  pin_B_ = user_B;
-
-  gpio_handle_ = Pigpiod::gpio().checkHandle();
-
-  Pigpiod::gpio().set(pin_A_, ros::IN, ros::PULL_UP);
-  Pigpiod::gpio().set(pin_B_, ros::IN, ros::PULL_UP);
-
-  set_watchdog(gpio_handle_, pin_A_, 0);
-  set_watchdog(gpio_handle_, pin_B_, 0);
-
-  switch (multiplier) {
-  case 2:
-    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryEx, this);
-    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryEx, this);
-    break;
-  case 4:
-    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotaryEEx, this);
-    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotaryEEx, this);
-    break;
-  default:
-    id_A_ = callback_ex(gpio_handle_, pin_A_, EITHER_EDGE, rotary, this);
-    id_B_ = callback_ex(gpio_handle_, pin_B_, EITHER_EDGE, rotary, this);
-    break;
-  }
+  RotaryInc(user_A, user_B, multiplier);
   pin_Z_ = user_Z;
 
   Pigpiod::gpio().set(pin_Z_, ros::IN, ros::PULL_UP);
@@ -93,8 +69,8 @@ void RotaryInc::rotary(int pi, unsigned int gpio, unsigned int edge,
   }
 }
 
-void RotaryInc::rotaryEx(int pi, unsigned int gpio, unsigned int edge,
-                         uint32_t tick, void *userdata) {
+void RotaryInc::rotaryTwo(int pi, unsigned int gpio, unsigned int edge,
+                          uint32_t tick, void *userdata) {
   RotaryInc *regist = (RotaryInc *)userdata;
 
   if (gpio == regist->pin_A_) {
@@ -109,8 +85,8 @@ void RotaryInc::rotaryEx(int pi, unsigned int gpio, unsigned int edge,
   }
 }
 
-void RotaryInc::rotaryEEx(int pi, unsigned int gpio, unsigned int edge,
-                          uint32_t tick, void *userdata) {
+void RotaryInc::rotaryFour(int pi, unsigned int gpio, unsigned int edge,
+                           uint32_t tick, void *userdata) {
   RotaryInc *regist = (RotaryInc *)userdata;
   if (gpio == regist->pin_A_) {
     regist->now_A_ = edge;
@@ -132,7 +108,7 @@ void RotaryInc::rotaryEEx(int pi, unsigned int gpio, unsigned int edge,
 void RotaryInc::rotaryZ(int pi, unsigned int gpio, unsigned int edge,
                         uint32_t tick, void *userdata) {
   RotaryInc *regist = (RotaryInc *)userdata;
-  if(gpio == regist->pin_Z_) {
+  if (gpio == regist->pin_Z_) {
     regist->position_ = 0;
   }
 }
